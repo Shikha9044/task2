@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background-color: #d39b9b;
+    }
+    
+    
+
+    .temp {
+      max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    }
+
+    input[type="text"] {
+      width: 50px;
+    }
+
+    .temp h2 {
+      font-size: 4vw;
+      font-family: 'Gill Sans', 'Gill Sans MT', ' Calibri', 'Trebuchet MS', sans-serif;
+    }
+
+    #input {
+      width: 7vw;
+      height: 4vh;
+    }
+
+    #inputUnit {
+      width: 7vw;
+      height: 4.5vh;
+    }
+
+    #outputUnit {
+      width: 7vw;
+      height: 5vh;
+    }
+
+    #convert {
+      width: 17vw;
+      height: 6vh;
+    }
+
+   .header{
+      font-size: 100px;
+      color: #fff;
+      text-align: center;
+      padding: 20px;
+      background-color: aquamarine;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1>TEMPERATURE CONVERTER</h1>
+
+  </header>
+  <div class="temp">
+   
+    <h2> Convert Temperature Here </h2>
+
+    <!-- Input fields for temperature values -->
+    <input type="text" id="input" placeholder="Input">
+    <select id="inputUnit">
+      <option value="celsius">Celsius</option>
+      <option value="fahrenheit">Fahrenheit</option>
+      <option value="kelvin">Kelvin</option>
+    </select>
+
+    <br><br>
+
+    <!-- Result display area -->
+    <div id="result"></div>
+    <select id="outputUnit">
+      <option value="celsius">Celsius</option>
+      <option value="fahrenheit">Fahrenheit</option>
+      <option value="kelvin">Kelvin</option>
+    </select>
+
+    <br><br>
+
+    <!-- Conversion button -->
+    <button onclick="convertTemp()" id="convert">Convert</button>
+  </div>
+
+  <script>
+    // JavaScript function for temperature conversion
+    function convertTemp() {
+      let input = parseFloat(document.getElementById('input').value);
+      let inputUnit = document.getElementById('inputUnit').value;
+      let outputUnit = document.getElementById('outputUnit').value;
+      let result = document.getElementById('result');
+
+      if (inputUnit === outputUnit) {
+        result.innerHTML = "Please select different units for conversion.";
+        return;
+      }
+
+      let convertedTemp;
+
+      if (inputUnit === 'celsius') {
+        if (outputUnit === 'fahrenheit') {
+          convertedTemp = (input * 9 / 5) + 32;
+        } else if (outputUnit === 'kelvin') {
+          convertedTemp = input + 273.15;
+        }
+      } else if (inputUnit === 'fahrenheit') {
+        if (outputUnit === 'celsius') {
+          convertedTemp = (input - 32) * 5 / 9;
+        } else if (outputUnit === 'kelvin') {
+          convertedTemp = (input - 32) * 5 / 9 + 273.15;
+        }
+      } else if (inputUnit === 'kelvin') {
+        if (outputUnit === 'celsius') {
+          convertedTemp = input - 273.15;
+        } else if (outputUnit === 'fahrenheit') {
+          convertedTemp = (input - 273.15) * 9 / 5 + 32;
+        }
+      }
+
+      result.innerHTML = `${input} ${inputUnit} is ${convertedTemp.toFixed(2)} ${outputUnit}.`;
+    }
+
+  </script>
+
+</body>
+
+</html>
